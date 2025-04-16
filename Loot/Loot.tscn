@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://tmdquma2ry7l"]
+
+[ext_resource type="Script" uid="uid://b72ou4xx4ibqp" path="res://Loot/loot.gd" id="1_pgwcl"]
+[ext_resource type="Texture2D" uid="uid://bo61jvbfwp0fn" path="res://icon.svg" id="2_nfwx3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdn7b"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_pgwcl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.38419e-07, 0)
+scale = Vector2(0.214844, 0.1875)
+texture = ExtResource("2_nfwx3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tdn7b")
+
+[connection signal="body_entered" from="." to="." method="_on_Loot_body_entered"]

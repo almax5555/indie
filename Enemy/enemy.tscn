@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfp5f0yqunaby"]
+
+[ext_resource type="Script" uid="uid://catg85q32471c" path="res://Enemy/enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://bo61jvbfwp0fn" path="res://icon.svg" id="1_7k104"]
+[ext_resource type="Script" uid="uid://c4qc702sfv1ta" path="res://Loot/item.gd" id="2_ncf7h"]
+[ext_resource type="Resource" uid="uid://der48uiwxosni" path="res://Loot/BodyArmor.tres" id="3_m6jha"]
+[ext_resource type="Resource" uid="uid://dx04m71mvlqyw" path="res://Loot/Helm.tres" id="4_glvfu"]
+[ext_resource type="PackedScene" uid="uid://tmdquma2ry7l" path="res://Loot/Loot.tscn" id="5_m6jha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(76, 72)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_4gyqm")
+possible_drops = Array[ExtResource("2_ncf7h")]([ExtResource("3_m6jha"), ExtResource("4_glvfu")])
+loot_scene = ExtResource("5_m6jha")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(0.617188, 0.585938)
+texture = ExtResource("1_7k104")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_4gyqm")

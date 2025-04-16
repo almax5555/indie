@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxijitqmsgqhe"]
+
+[ext_resource type="Script" uid="uid://d1od7lhecfee" path="res://Bullet/bullet.gd" id="1_ayd6b"]
+[ext_resource type="Texture2D" uid="uid://bo61jvbfwp0fn" path="res://icon.svg" id="2_4s4u5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s4u5"]
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_ayd6b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.117188, 0.109375)
+texture = ExtResource("2_4s4u5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4s4u5")
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

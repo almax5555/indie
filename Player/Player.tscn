@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1qmph7jyh4qw"]
+
+[ext_resource type="Script" uid="uid://bejs8rsqlk7b0" path="res://Player/player.gd" id="1_kpjcp"]
+[ext_resource type="PackedScene" uid="uid://cxijitqmsgqhe" path="res://Bullet/Bullet.tscn" id="2_e80uo"]
+[ext_resource type="Texture2D" uid="uid://bo61jvbfwp0fn" path="res://icon.svg" id="2_kne1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
+size = Vector2(69, 61)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 2
+script = ExtResource("1_kpjcp")
+bullet_scene = ExtResource("2_e80uo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.84217e-14, -2)
+scale = Vector2(0.539063, 0.476563)
+texture = ExtResource("2_kne1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -2.5)
+shape = SubResource("RectangleShape2D_e80uo")

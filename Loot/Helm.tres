@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://dx04m71mvlqyw"]
+
+[ext_resource type="Script" uid="uid://c4qc702sfv1ta" path="res://Loot/item.gd" id="1_opj5d"]
+
+[resource]
+script = ExtResource("1_opj5d")
+name = ""
+description = ""
+rarity = 0
+effect = ""
+metadata/_custom_type_script = "uid://c4qc702sfv1ta"
