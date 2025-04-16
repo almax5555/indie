@@ -1,25 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxijitqmsgqhe"]
+[gd_scene load_steps=9 format=3 uid="uid://cxijitqmsgqhe"]
 
 [ext_resource type="Script" uid="uid://d1od7lhecfee" path="res://Bullet/bullet.gd" id="1_ayd6b"]
-[ext_resource type="Texture2D" uid="uid://bo61jvbfwp0fn" path="res://icon.svg" id="2_4s4u5"]
+[ext_resource type="Texture2D" uid="uid://csoj5knwv5n24" path="res://Images/Fireball/FB001.png" id="2_jwp3u"]
+[ext_resource type="Texture2D" uid="uid://bt7rttuj6snef" path="res://Images/Fireball/FB002.png" id="3_vj3l3"]
+[ext_resource type="Texture2D" uid="uid://b2mdbngnesusc" path="res://Images/Fireball/FB003.png" id="4_ofsoy"]
+[ext_resource type="Texture2D" uid="uid://c4752ss4jt6io" path="res://Images/Fireball/FB004.png" id="5_7lgec"]
+[ext_resource type="Texture2D" uid="uid://bi1q05i10m560" path="res://Images/Fireball/FB005.png" id="6_osciv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4s4u5"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yxda4"]
+radius = 12.0
+height = 48.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mv5j4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jwp3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vj3l3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ofsoy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7lgec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_osciv")
+}],
+"loop": true,
+"name": &"fireball",
+"speed": 5.0
+}]
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_ayd6b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
-scale = Vector2(0.117188, 0.109375)
-texture = ExtResource("2_4s4u5")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_4s4u5")
+position = Vector2(-7, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yxda4")
 
 [node name="LifeTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-24, 3)
+scale = Vector2(1.94375, 1.98437)
+sprite_frames = SubResource("SpriteFrames_mv5j4")
+animation = &"fireball"
+frame = 1
+frame_progress = 0.750001
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

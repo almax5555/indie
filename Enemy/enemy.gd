@@ -14,7 +14,7 @@ signal enemy_killed
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	if current_health <= 0:
-		call_deferred("_on_death")  # Важно: вызываем через call_deferred
+		call_deferred("_on_death")
 
 
 func _on_death() -> void:
