@@ -12,6 +12,7 @@ var experience_to_next := 20
 var inventory: Array[Item] = []
 var can_shoot := true
 var last_direction = Vector2.RIGHT
+var current_weapon: Weapon
 
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -59,26 +60,25 @@ func _physics_process(_delta):
 			anim.play("Run")
 
 func shoot():
-	if not can_shoot:
-		return
+	var nearest_enemy = find_nearest_enemy()
+	if nearest_enemy:
+		current_weapon.shoot(global_position, nearest_enemy.global_position, self)
 
-	if bullet_scene:
-		var bullet = bullet_scene.instantiate()
-		get_tree().current_scene.add_child(bullet)
-		bullet.global_position = global_position
+func find_nearest_enemy() -> Node2D:
+	var enemies = get_tree().get_nodes_in_group("Enemies")
+	var nearest = null
+	var min_distance = INF
+	for enemy in enemies:
+		var distance = global_position.distance_to(enemy.global_position)
+		if distance < min_distance:
+			min_distance = distance
+			nearest = enemy
+	return nearest
 
-		var shoot_direction = (get_global_mouse_position() - global_position).normalized()
-
-		bullet.set_direction(shoot_direction)
-
-		can_shoot = false
-		await get_tree().create_timer(0.5).timeout 
-		can_shoot = true
-		
 func _ready():
-	weapon = preload("res://weapon/default_weapon.tres")
-	$ShootTimer.wait_time = weapon.fire_rate
-	$ShootTimer.start()
+	if current_weapon:
+		$ShootTimer.wait_time = 1.0 / current_weapon.fire_rate
+		$ShootTimer.start()
 	
 func _on_ShootTimer_timeout():
 	var closest_enemy = get_closest_enemy()

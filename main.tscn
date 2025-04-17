@@ -8,9 +8,8 @@
 
 [node name="Node_Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(166, 356)
-speed = null
 
-[node name="ShootTimer" type="Timer" parent="Node_Player"]
+[node name="ShootTimer2" type="Timer" parent="Node_Player"]
 wait_time = 0.5
 autostart = true
 
