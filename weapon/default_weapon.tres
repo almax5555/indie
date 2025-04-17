@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cskeijpu5mkwv"]
+
+[ext_resource type="Script" uid="uid://3tcljunkqsta" path="res://weapon/Weapon.gd" id="1_hmgmm"]
+[ext_resource type="PackedScene" uid="uid://cxijitqmsgqhe" path="res://Bullet/Bullet.tscn" id="1_mt2yp"]
+
+[resource]
+script = ExtResource("1_hmgmm")
+fire_rate = 0.5
+damage = 5
+bullet_count = 1
+spread_degrees = 0.0
+bullet_scene = ExtResource("1_mt2yp")
+metadata/_custom_type_script = "uid://3tcljunkqsta"

@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @export var bullet_scene: PackedScene
 @export var speed: float = 500.0
+@export var weapon: Weapon
+@onready var shoot_timer: Timer = $ShootTimer
+
 
 var level := 1
 var experience := 0
@@ -9,6 +12,7 @@ var experience_to_next := 20
 var inventory: Array[Item] = []
 var can_shoot := true
 var last_direction = Vector2.RIGHT
+
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -25,7 +29,6 @@ func level_up():
 	level += 1
 	experience -= experience_to_next
 	experience_to_next = int(experience_to_next * 1.5)
-	print("Level Up! Now level %d" % level)
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -71,3 +74,27 @@ func shoot():
 		can_shoot = false
 		await get_tree().create_timer(0.5).timeout 
 		can_shoot = true
+		
+func _ready():
+	weapon = preload("res://weapon/default_weapon.tres")
+	$ShootTimer.wait_time = weapon.fire_rate
+	$ShootTimer.start()
+	
+func _on_ShootTimer_timeout():
+	var closest_enemy = get_closest_enemy()
+	if closest_enemy:
+		weapon.shoot(global_position, closest_enemy.global_position, self)
+		
+func get_closest_enemy() -> Node2D:
+	var closest = null
+	var min_dist = INF
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		var dist = global_position.distance_to(enemy.global_position)
+		if dist < min_dist:
+			min_dist = dist
+			closest = enemy
+	return closest
+
+
+func _on_shoot_timer_ready() -> void:
+	pass # Replace with function body.
